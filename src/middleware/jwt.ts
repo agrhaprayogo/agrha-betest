@@ -1,9 +1,19 @@
 import { NextFunction, Request, Response } from 'express'
 import jwt from "jsonwebtoken"
 import config from "config";
+import { UserServices } from "@services/user.services";
+const userServices = new UserServices();
 
-export const verifyToken = (req:Request, res:Response, next:NextFunction) => {
+export const verifyToken = async (req:Request, res:Response, next:NextFunction) => {
   let access_token
+  if (res.locals.account) {
+     let account = JSON.parse(res.locals.account)
+     let user = await userServices.findUserByUserId(account.userId)
+     if (user) {
+      res.locals.user = user
+      next()
+     }
+  }
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')) 

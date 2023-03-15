@@ -7,5 +7,6 @@ export default {
     password: 'MONGO_PASSWORD',
     database: 'MONGO_DB',
   },
-  tokenKey:'TOKENKEY'
+  tokenKey:'TOKENKEY',
+  redisKey:'REDISKEY'
 }

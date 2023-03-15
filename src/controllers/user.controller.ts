@@ -7,6 +7,7 @@ import { AccountServices } from "@services/account.services";
 import AppError from "@utils/appError";
 import { runInTransaction } from "typeorm-transactional";
 import { RegisterDto } from "@dtos/auth.dto";
+import { caching } from "@middleware/redisCheck";
 import jwt from "jsonwebtoken"
 import uuid from "@utils/uuid";
 import config from "config";
@@ -43,7 +44,7 @@ export const createUserHandler = async (
 
       const user = await userServices.createUser(newUser);
       const account = await accountServices.createAccount(newAccount);
-
+      
       res.status(201).json({
         status: "success",
         data: {
@@ -220,9 +221,11 @@ export const login = async (
     }
     let token 
     const tokenKey = config.get<string>('tokenKey');
+    const redisKey = config.get<string>('redisKey');
     const match = await bcrypt.compare(req.body.password, account[0].password);
     if(match) {
       token = jwt.sign({ userId: account[0].userId }, tokenKey)
+      await caching(redisKey, account)
       res.status(200).json({
         status: "success",
         data: {

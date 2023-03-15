@@ -17,7 +17,6 @@ export class AccountServices {
   }
 
   async findAccountByUsername(payload:string) {
-    console.log("REPO PAYLOAD", payload)
     const result = await this.accountRepository.find({
       where: {
         userName: payload,
