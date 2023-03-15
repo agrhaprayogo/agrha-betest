@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true,
+    "outDir": "./dist",
+    "typeRoots": ["./node_modules/@types"],
+    "baseUrl": ".",
+    "paths": {
+      "@middleware/*": ["src/middleware/*"],
+      "@dtos/*": ["src/dtos/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@utils/*": ["src/utils/*"],
+      "@services/*": ["src/services/*"],
+      "@entities/*": ["src/entities/*"],
+      "@test-factory/*": ["test/factory/*"],
+      "@test-helpers/*": ["test/helpers/*"]
+    }
+  },
+  "include": ["src/**/*", "test"],
+  "ts-node": {
+    "transpileOnly": true,
+    "swc": true
+  }
+}
