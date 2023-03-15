@@ -8,7 +8,7 @@ async function setup() {
   console.log('\nInitiating Testing Database...')
   await createDatabase({
     options: TestDataSource.options,
-    initialDatabase: 'postgres',
+    initialDatabase: 'mongodb',
   })
   console.log('\nTesting Database has Initiated')
 }

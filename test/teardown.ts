@@ -8,7 +8,7 @@ async function teardown() {
   console.log('\nDropping Testing Database...')
   await dropDatabase({
     options: TestDataSource.options,
-    initialDatabase: 'postgres',
+    initialDatabase: 'mongodb',
   })
   console.log('\nTesting Database has Dropped')
 }
