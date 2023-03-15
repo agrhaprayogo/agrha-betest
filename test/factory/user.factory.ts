@@ -5,9 +5,10 @@ import { setSeederFactory } from 'typeorm-extension'
 export default setSeederFactory(User, (faker) => {
   const user = new User()
   user.fullName = faker.name.fullName()
-  user.email = faker.internet.email(user.fullName)
-  user.username = faker.internet.userName()
-  user.firebaseId = uuid()
+  user.emailAddress = faker.internet.email(user.fullName)
+  user.accountNumber = faker.random.numeric(8)
+  user.registrationNumber = faker.random.numeric(8)
+  user.userId = uuid()
 
   return user
 })
